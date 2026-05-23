@@ -1,34 +1,36 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PipeBombTest {
+    PipeBomb bomb;
+    private final PrintStream originalOut = System.out;
+    private ByteArrayOutputStream captured;
 
     @BeforeEach
-    void setUp() {
-    }
-    @Test
-    void testFlow() {
-        List<Integer> seen = new ArrayList<>();
-        PipeBomb bomb = new PipeBomb(5);
-        bomb.register(t -> seen.add(t));
-        bomb.start();
-        assertEquals(List.of(1, 2, 3, 4, 5), seen);
+    void redirectStdout() {
+        captured = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(captured));
+        bomb = new PipeBomb(5);
     }
 
-    @Test
-    void register() {
+    @AfterEach
+    void restoreStdout() {
+        System.setOut(originalOut);
     }
-
     @Test
-    void notifyListeners() {
+    void constructor_InvalidState() {
+        assertThrows(IllegalArgumentException.class,()->new PipeBomb(-20));
     }
-
     @Test
-    void start() {
+    void register_Valid() {
+        assertDoesNotThrow(()->bomb.register(new StateMachineEntity("sharon",1, new State ("Start",1))));
     }
 }

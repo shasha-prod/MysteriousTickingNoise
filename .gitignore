@@ -1,0 +1,14 @@
+# Packaged artifacts
+*.jar
+# Compiled output
+*.class
+out/
+target/
+build/
+bin/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws

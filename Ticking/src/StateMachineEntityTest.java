@@ -22,7 +22,18 @@ class StateMachineEntityTest {
     void restoreStdout() {
         System.setOut(originalOut);   // critical — see below
     }
-
+    @Test
+    void constructor_Invalid_emptyEntityName() {
+        assertThrows(IllegalArgumentException.class,()->new StateMachineEntity("",1, new State ("Start",1)));
+    }
+    @Test
+    void constructor_Invalid_IllegalTickCount() {
+        assertThrows(IllegalArgumentException.class,()->new StateMachineEntity("scas",-21, new State ("Start",1)));
+    }
+    @Test
+    void constructor_Invalid_EmptyState() {
+        assertThrows(IllegalArgumentException.class,()->new StateMachineEntity("scas",21));
+    }
     @Test
     void prints_name_on_entry_to_first_state() {
         StateMachineEntity snape = new StateMachineEntity("Snape", 1,
@@ -30,14 +41,22 @@ class StateMachineEntityTest {
                 new State("Snape", 2),
                 new State("Severus Snape", 4));
 
-        snape.onTick(1);   // posInCycle = 0 → enters state 0
-
+        snape.onTick(1);
         assertEquals("Snape" + System.lineSeparator(), captured.toString());
     }
+
     @Test
-    void onTick() {
+    void testToString_Valid() {
+        StateMachineEntity snape = new StateMachineEntity("Snape", 1,
+                new State("Snape", 2),
+                new State("Snape", 2),
+                new State("Severus Snape", 4));
+        assertEquals("Snape",snape.toString());
     }
     @Test
-    void testToString() {
+    void testToString_Invalid() {
+        StateMachineEntity snape = new StateMachineEntity("", 1,
+                new State("empty", 2));
+        assertNotEquals("",snape.toString());
     }
 }

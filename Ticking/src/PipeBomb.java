@@ -10,7 +10,10 @@ public class PipeBomb implements Observable {
         this.countdown = countdown;
         this.listeners = new ArrayList<>();
     }
-
+    public PipeBomb(){
+        this.countdown = 160;
+        this.listeners = new ArrayList<>();
+    }
     @Override public void register(TickListener listener){
         listeners.add(listener);
     }
