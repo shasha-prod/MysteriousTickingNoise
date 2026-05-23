@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package com.mysteryticking;
+
 import java.util.Arrays;
 import java.util.List;
 

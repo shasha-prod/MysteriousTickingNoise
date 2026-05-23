@@ -1,3 +1,5 @@
+package com.mysteryticking;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,12 +8,8 @@ public class PipeBomb implements Observable {
     private final List<TickListener> listeners;
 
     public PipeBomb(int countdown){
-        if (countdown < 1){ throw new IllegalArgumentException("The countdown entered cannot be negative"); }
+        if (countdown < 1){ throw new IllegalArgumentException("The countdown entered must be at least 1."); }
         this.countdown = countdown;
-        this.listeners = new ArrayList<>();
-    }
-    public PipeBomb(){
-        this.countdown = 160;
         this.listeners = new ArrayList<>();
     }
     @Override public void register(TickListener listener){

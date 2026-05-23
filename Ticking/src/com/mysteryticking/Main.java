@@ -1,9 +1,16 @@
+package com.mysteryticking;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //create the PipeBomb timing:
-        PipeBomb pd = new PipeBomb(24);
+        int countdown;
+        if(args.length == 0) {countdown = 160;}
+        else{
+            countdown = Integer.parseInt(args[0]);
+        }
+        //create the com.mysteryticking.PipeBomb timing:
+        PipeBomb pd = new PipeBomb(countdown);
 
         //creates the states:
         StateMachineEntity snape = new StateMachineEntity("Snape", 1,
@@ -25,12 +32,12 @@ public class Main {
         StateMachineEntity harry = new StateMachineEntity("Harry Potter", 65,
                 new State("Harry Potter", 1),
                 new State("Harry Potter", 1),
-                new State("OoOhhh", 2),
+                new State("OoOohhhh", 2),
                 new State("Harry Potter", 1),
                 new State("Harry Potter", 1),
-                new State("YeeeEeaaaH", 1));
+                new State("YeeeEeaahH", 2));
 
-        //add all the entities to register in PipeBomb
+        //add all the entities to register in com.mysteryticking.PipeBomb
         pd.register(snape);
         pd.register(dumbledore);
         pd.register(ron);
