@@ -57,8 +57,7 @@ class StateMachineEntityTest {
     }
     @Test
     void testToString_Invalid() {
-        StateMachineEntity snape = new StateMachineEntity("", 1,
-                new State("empty", 2));
-        assertNotEquals("",snape.toString());
+        assertThrows(IllegalArgumentException.class,()->new StateMachineEntity("", 1,
+                new State("empty", 2)));
     }
 }
