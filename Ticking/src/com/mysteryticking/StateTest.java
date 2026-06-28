@@ -8,7 +8,12 @@ class StateTest {
 
     @Test
     void nullNameError() {
-        assertThrows(IllegalArgumentException.class, () -> new State("", 3));
+        assertThrows(IllegalArgumentException.class, () -> new State(null, 3));
+    }
+
+    @Test
+    void emptyNameIsLegal() {
+        assertDoesNotThrow(() -> new State("", 3));
     }
 
     @Test
