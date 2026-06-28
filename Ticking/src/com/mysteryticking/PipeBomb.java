@@ -16,9 +16,13 @@ public class PipeBomb implements Observable {
         listeners.add(listener);
     }
     @Override public void notifyListeners(int tick){
-        for(TickListener listener : listeners){
+        for(TickListener listener : new ArrayList<>(listeners)){
             listener.onTick(tick);
         }
+    }
+
+    @Override public boolean unregister(TickListener listener){
+        return listeners.remove(listener);
     }
     public void start(){
         for (int tick = 1; tick <= countdown; tick++) {

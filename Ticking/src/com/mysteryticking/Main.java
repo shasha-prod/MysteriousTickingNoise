@@ -1,7 +1,5 @@
 package com.mysteryticking;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
         int countdown;
@@ -37,18 +35,21 @@ public class Main {
                 new State("Harry Potter", 1),
                 new State("YeeeEeaahH", 2));
 
-        //add all the entities to register in com.mysteryticking.PipeBomb
+        // FiniteEntity: Ron fires at most 3 times, then unregisters itself
+        TickListener finiteron = new FiniteEntity(ron, pd, 3);
+
         pd.register(snape);
         pd.register(dumbledore);
-        pd.register(ron);
+        pd.register(finiteron);
         pd.register(hermione);
         pd.register(harry);
+        pd.register(new ConditionalEntity(t -> t % 7 == 0, "Dobby is free!"));
+        pd.register(new ConditionalEntity(t -> t == 13 || t == 42, "Avada Kedavra!"));
         pd.register(tick -> {
             if (tick % 8 == 0) {
                 System.out.println();
             }});
 
-        //starting up
         pd.start();
         }
     }
